@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<title>Some tests of tracking</title>
+</head>
+<body>
+    
+    <button id="start"> Start</button>
+    <button id="stop">Stop</button>
+    
+    
+  <!--  Farouktouil1976*-
+
+chrome://inspect/devices
+JSON.parse(localStorage.coordinates)
+copy(JSON.parse(localStorage.coordinates))
+swith beteen lat and long with ctrl + D to select ],
+pk.eyJ1IjoiZmFyb3VrdG91aWwiLCJhIjoiY2twbDhjZnpxMDhxbjJwbzFsYzNmZzQwcyJ9.H1lacPoEf2vPxYJLGb3O1A
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyb3VrdG91aWwiLCJhIjoiY2lyZzZva2d1MDAxY2lnbmt3NmI2bjRwNSJ9.dMUZ8IU9v-mvqygVMnYkXw';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11'
+});
+</script>
+-->
+   
+    <script>
+    const start = document.querySelector("#start");
+    const stop = document.querySelector("#stop");
+
+      const coordinates = [];
+      start.addEventListener("click", () => {
+          navigator.geolocation.watchPosition(
+          data => {
+              console.log(data);
+              coordinates.push([data.coords.latitude, data.coords.longitude]);
+              window.localStorage.setItem("coordinates", JSON.stringify(coordinates))
+          },
+              
+              error => console.log(error),{
+              enableHighAccuracy: true
+          }
+              
+              
+        );
+
+      });
+        
+      stop.addEventListener("click", () => {});
+
+    </script>
+    
+    
+    
+</body>
