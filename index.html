@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<title>Some tests of tracking</title>
+</head>
+<body>
+    
+    <button id="start"> Start</button>
+    <button id="stop">Stop</button>
+    
+    
+  <!--  Farouktouil1976_(-->
+    
+    <script>
+    const start = document.querySelector("#start");
+    const stop = document.querySelector("#stop");
+
+      const coordinates = [];
+      start.addEventListener("click", () => {
+          navigator.geolocation.watchPosition(
+          data => {
+              console.log(data);
+              coordinates.push([data.coords.latitude, data.coords.longitude]);
+              window.localStorage.setItem("coordinates", JSON.stringify(coordinates))
+          },
+              
+              error => console.log(error),{
+              enableHighAccuracy: true
+          }
+              
+              
+        );
+
+      });
+        
+        
+        
+        
+
+      stop.addEventListener("click", () => {});
+
+    </script>
+</body>
