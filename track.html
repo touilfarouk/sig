@@ -4,15 +4,24 @@
 
 
 <title>Some tests of tracking</title>
+
+<style>
+
+        #map{
+            width: 100vw;
+            height:100vh;
+        }
+</style>
+
 </head>
 <body>
-    
+  <div id="result"></div>
+  <div id="map"></div>
     <button id="start"> Start</button>
-    <button id="stop">Stop</button>
+    <button id="stop">trassage de la ligne</button>
     
     
   <!--  Farouktouil1976*-
-
 chrome://inspect/devices
 JSON.parse(localStorage.coordinates)
 copy(JSON.parse(localStorage.coordinates))
@@ -31,7 +40,7 @@ style: 'mapbox://styles/mapbox/streets-v11'
 </script>
 -->
    
-    <script>
+    <script type="module">
     const start = document.querySelector("#start");
     const stop = document.querySelector("#stop");
 
@@ -40,8 +49,9 @@ style: 'mapbox://styles/mapbox/streets-v11'
           navigator.geolocation.watchPosition(
           data => {
               console.log(data);
-              coordinates.push([data.coords.latitude, data.coords.longitude]);
+              coordinates.push(data.coords.latitude, data.coords.longitude);
               window.localStorage.setItem("coordinates", JSON.stringify(coordinates))
+              
           },
               
               error => console.log(error),{
@@ -52,8 +62,49 @@ style: 'mapbox://styles/mapbox/streets-v11'
         );
 
       });
-        
-      stop.addEventListener("click", () => {});
+
+      // Get thinks from the localStorage right here on this button
+      stop.addEventListener("click", () => {
+      
+      let objFromLocalStorage = localStorage.getItem('coordinates');
+      document.getElementById("result").innerHTML = objFromLocalStorage; 
+    /*  mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyb3VrdG91aWwiLCJhIjoiY2twbDhjZnpxMDhxbjJwbzFsYzNmZzQwcyJ9.H1lacPoEf2vPxYJLGb3O1A';
+      const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [-122.486052, 37.830348],
+      zoom: 15
+});
+console.log("dddddddddddddd"+objFromLocalStorage)
+    map.on('load', function () {
+      map.addSource('route', {
+      'type': 'geojson',
+      'data': {
+      'type': 'Feature',
+      'properties': {},
+      'geometry': {
+      'type': 'LineString',
+          'coordinates':objFromLocalStorage
+      }
+      }
+  });
+  
+    map.addLayer({
+      'id': 'route',
+      'type': 'line',
+      'source': 'route',
+      'layout': {
+      'line-join': 'round',
+      'line-cap': 'round'
+    },
+      'paint': {
+      'line-color': '#888',
+      'line-width': 8
+      }
+  });
+});*/
+console.log("dddddddddddddd"+objFromLocalStorage)
+});
 
     </script>
     
